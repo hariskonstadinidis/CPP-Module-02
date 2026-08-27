@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:18 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/27 13:06:04 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/08/27 20:14:01 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@
 
 int main()
 {
-	Fixed a;
-	Fixed const b( 10 );
-	Fixed const c( 42.42f );
-	Fixed const d( b );
-	a = Fixed( 1234.4321f );
+	// Fixed a;
+	// Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << ++a << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << a++ << std::endl;
+	// std::cout << a << std::endl;
 
-	std::cout << "a is " << roundf(a.toFloat()) << " as float" << std::endl;
+	// std::cout << b << std::endl;
+
+	// std::cout << Fixed::max( a, b ) << std::endl;
+	
+	Fixed han(23.5f);
+	Fixed ban(23.6f);
+	std::cout << std::boolalpha;
+	std::cout << (ban < han) << std::endl;
+	std::cout << (han < ban) << std::endl;
+	std::cout << (han - ban) << std::endl;
+	std::cout << (han + ban) << std::endl;
+	std::cout << (han * ban) << std::endl;
+	std::cout << (han / ban) << std::endl;
+	std::cout << std::noboolalpha;
 	return 0;
 }

@@ -3,40 +3,48 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+         #
+#    By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/12 13:55:01 by hkonstan          #+#    #+#              #
-#    Updated: 2026/08/20 14:29:22 by hariskon         ###   ########.fr        #
+#    Updated: 2026/08/27 13:50:57 by hkonstan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Fixed
+NAME = ex01
 
 CXX = c++
+
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 
 BUILD_DIR = build
 
 SRC = $(wildcard *.cpp)
+
 OBJ = $(SRC:%.cpp=$(BUILD_DIR)/%.o)
+
 DEP = $(OBJ:.o=.d)
+
+GREEN = \033[0;32m
+RESET = \033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@printf "$(GREEN)✓ $(NAME)$(RESET)\n"
 
 $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	@printf "$(GREEN)✓ $<$(RESET)\n"
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

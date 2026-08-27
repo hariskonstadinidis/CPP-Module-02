@@ -6,11 +6,11 @@
 #    By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/12 13:55:01 by hkonstan          #+#    #+#              #
-#    Updated: 2026/08/27 13:24:00 by hkonstan         ###   ########.fr        #
+#    Updated: 2026/08/27 14:04:36 by hkonstan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Fixed
+NAME = ex02
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -g
@@ -33,7 +33,6 @@ $(NAME): $(OBJ)
 $(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 	@printf "$(GREEN)✓ $<$(RESET)\n"
-	
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 

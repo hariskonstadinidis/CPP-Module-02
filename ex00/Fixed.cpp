@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/25 16:19:11 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/08/27 13:49:59 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,34 @@
 #include <iomanip>
 #include <cmath>
 
-Fixed::Fixed():fixedPointNum(0), fractionalNum(8){
-	std::cout << "default constructor called\n";
+Fixed::Fixed():fixedPointNum(0){
+	std::cout << "Default constructor called\n";
 }
 
 Fixed::Fixed(const Fixed& other){
+	std::cout << "Copy constructor called\n";
 	*this = other;
-	std::cout << "copy constructor called\n";
 }
 
 Fixed& Fixed::operator =(const Fixed& other){
+	std::cout << "Copy assignment operator called\n";
 	if (this != &other)
 	{
-		this->fixedPointNum = other.fixedPointNum;
+		this->fixedPointNum = other.getRawBits();
 	}
-	std::cout << "copy operator called\n";
 	return *this;
 }
 
 Fixed::~Fixed(){
-	std::cout << "default destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
-int Fixed::getRawBits(void){
-	std::cout << "getRawBits called\n";
+int Fixed::getRawBits(void) const{
+	std::cout << "getRawBits member function called\n";
 	return (this->fixedPointNum);
 }
 
 void Fixed::setRawBits(int const raw){
+	std::cout << "setRawBits member function called\n";
 	this->fixedPointNum = raw;
-	std::cout << "setRawBits called\n";
 }

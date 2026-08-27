@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:18 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/21 15:28:01 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/08/27 13:37:12 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 
 int main()
 {
-	Fixed num;
+	Fixed a;
+	Fixed b(a);
+	Fixed c;
 	
-	num.setRawBits(576);
-	std::cout << num.getRawBits() << std::endl;
+	c = b;
+	
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	
+	return 0;
 }
