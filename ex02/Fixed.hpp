@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/27 20:03:36 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/08/28 15:51:14 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@ class Fixed{
 	//Operator Member Functions
 	Fixed& operator =(const Fixed& other);
 	//Comparison operator Functions
-	bool operator <(Fixed& other);
-	bool operator >(Fixed& other);
-	bool operator ==(Fixed& other);
-	bool operator !=(Fixed& other);
+	bool operator <(Fixed& other) const;
+	bool operator >(Fixed& other) const;
+	bool operator ==(Fixed& other) const;
+	bool operator !=(Fixed& other) const;
 	//Arithmetic operator Functions
-	float operator +(Fixed& other);
-	float operator -(Fixed& other);
-	float operator *(Fixed& other);
-	float operator /(Fixed& other);
+	float operator +(Fixed other);
+	float operator -(Fixed other);
+	float operator *(Fixed other);
+	float operator /(Fixed other);
+	//Pre/Pro Decrement/Increment operators
+	Fixed& operator ++();
+	// float operator -(Fixed& other);
+	// float operator *(Fixed& other);
+	// float operator /(Fixed& other);
 	//Destructor
 	~Fixed();
 	
@@ -42,10 +47,10 @@ class Fixed{
 	float	toFloat(void) const;
 	float	getRawBits(void) const;
 	
-	// static int& min(int& num1, int& num2);
-	// static int& min(const int& num1, const int& num2);
-	// static int& max(int& num1, int& num2);
-	// static int& max(const int& num1, const int& num2);
+	static Fixed& min(Fixed& num1, Fixed& num2);
+	static const Fixed& min(const Fixed& num1, const Fixed& num2);
+	static Fixed& max(Fixed& num1, Fixed& num2);
+	static const Fixed& max(const Fixed& num1, const Fixed& num2);
 	
 	private:
 	int		fixedPointNum;

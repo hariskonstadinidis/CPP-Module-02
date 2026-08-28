@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/27 20:10:56 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/08/28 15:51:22 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 //Constructors
 Fixed::Fixed(void){
 	std::cout << "default constructor called\n";
+	this->fixedPointNum = 0;
 }
 
 Fixed::Fixed(const int fixed_value){
@@ -47,7 +48,7 @@ Fixed& Fixed::operator =(const Fixed& other){
 	return *this;
 }
 
-bool Fixed::operator <(Fixed& other){
+bool Fixed::operator <(Fixed& other) const{
 	std::cout << "< operator called\n";
 	if (this != &other)
 	{
@@ -57,7 +58,7 @@ bool Fixed::operator <(Fixed& other){
 	return false;
 }
 
-bool Fixed::operator >(Fixed& other){
+bool Fixed::operator >(Fixed& other) const{
 	std::cout << "> operator called\n";
 	if (this != &other)
 	{
@@ -67,7 +68,7 @@ bool Fixed::operator >(Fixed& other){
 	return false;
 }
 
-bool Fixed::operator ==(Fixed& other){
+bool Fixed::operator ==(Fixed& other) const{
 	std::cout << "== operator called\n";
 	if (this != &other)
 	{
@@ -78,7 +79,7 @@ bool Fixed::operator ==(Fixed& other){
 	return true;	
 }
 
-bool Fixed::operator !=(Fixed& other){
+bool Fixed::operator !=(Fixed& other) const{
 	std::cout << "!= operator called\n";
 	if (this != &other)
 	{
@@ -89,30 +90,63 @@ bool Fixed::operator !=(Fixed& other){
 }
 
 //Arithmetic operator Functions
-float Fixed::operator +(Fixed& other){
+float Fixed::operator +(Fixed other){
 	std::cout << "+ operator called\n";
 	return this->toFloat() + other.toFloat();
 }
 
-float Fixed::operator -(Fixed& other){
+float Fixed::operator -(Fixed other){
 	std::cout << "- operator called\n";
 	return this->toFloat() - other.toFloat();
 }
 
-float Fixed::operator *(Fixed& other){
+float Fixed::operator *(Fixed other){
 	std::cout << "* operator called\n";
 	return this->toFloat() * other.toFloat();
 }
 
-float Fixed::operator /(Fixed& other){
+float Fixed::operator /(Fixed other){
 	std::cout << "/ operator called\n";
 	return this->toFloat() / other.toFloat();
 }
 
+//Pre/Pro Decrement/Increment operators
+Fixed& Fixed::operator ++(void){
+	this->fixedPointNum += epsilon;
+	return *this;
+}
+
+//MinMax Functions
+Fixed& Fixed::min(Fixed& num1, Fixed& num2){
+	if(num1 < num2)
+		return num1;
+	return num2;
+}
+
+const Fixed& Fixed::min(const Fixed& num1 , const Fixed& num2){
+	if(num1.getRawBits() < num2.getRawBits())
+		return num1;
+	return num2;
+}
+
+Fixed& Fixed::max(Fixed& num1, Fixed& num2){
+	if(num1 > num2)
+		return num1;
+	return num2;
+}
+
+const Fixed& Fixed::max(const Fixed& num1 , const Fixed& num2){
+	if(num1.getRawBits() > num2.getRawBits())
+		return num1;
+	return num2;
+}
+
+//Destructor
 Fixed::~Fixed(){
 	std::cout << "default destructor called" << std::endl;
 }
 
+//Getter Functions
 float Fixed::getRawBits(void) const{
 	return(this->fixedPointNum / pow(2, this->fractionalNum));
 }
@@ -124,7 +158,7 @@ int Fixed::toInt(void)const{
 float Fixed::toFloat(void)const{
 	return (this->fixedPointNum/pow(2, this->fractionalNum));
 }
-
+//Non member ioperator function
 std::ostream& operator <<(std::ostream& file, const Fixed& a){
 	file << a.toFloat(); 
 	return file;
