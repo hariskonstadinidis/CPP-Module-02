@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/28 15:51:22 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/07 15:42:23 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,33 @@
 #include <cmath>
 #include <ostream>
 
+static float epsilon = 0.00390625f;
+
 //Constructors
 Fixed::Fixed(void){
-	std::cout << "default constructor called\n";
+	DBG(<< "default constructor called\n");
 	this->fixedPointNum = 0;
 }
 
 Fixed::Fixed(const int fixed_value){
+	DBG(<< "int constructor called\n");
 	fixedPointNum = fixed_value * pow(2, this->fractionalNum);
-	std::cout << "int constructor called\n";
 }
 
 Fixed::Fixed(const float fixed_number){
+	DBG(<< "float constructor called\n");
 	fixedPointNum = fixed_number * pow(2, this->fractionalNum);
-	std::cout << "float constructor called\n";
 }
 
 //Copy Constructor
 Fixed::Fixed(const Fixed& other){
+	DBG(<< "copy constructor called\n");
 	*this = other;
-	std::cout << "copy constructor called\n";
 }
 
 //Operator Member Functions
 Fixed& Fixed::operator =(const Fixed& other){
-	std::cout << "copy operator called\n";
+	DBG(<< "copy operator called\n");
 	if (this != &other)
 	{
 		this->fixedPointNum = other.fixedPointNum;
@@ -49,7 +51,7 @@ Fixed& Fixed::operator =(const Fixed& other){
 }
 
 bool Fixed::operator <(Fixed& other) const{
-	std::cout << "< operator called\n";
+	DBG(<< "< operator called\n");
 	if (this != &other)
 	{
 		if (this->fixedPointNum < other.fixedPointNum)
@@ -59,7 +61,7 @@ bool Fixed::operator <(Fixed& other) const{
 }
 
 bool Fixed::operator >(Fixed& other) const{
-	std::cout << "> operator called\n";
+	DBG(<< "> operator called\n");
 	if (this != &other)
 	{
 		if (this->fixedPointNum > other.fixedPointNum)
@@ -69,7 +71,7 @@ bool Fixed::operator >(Fixed& other) const{
 }
 
 bool Fixed::operator ==(Fixed& other) const{
-	std::cout << "== operator called\n";
+	DBG(<< "== operator called\n");
 	if (this != &other)
 	{
 		if (this->fixedPointNum == other.fixedPointNum)
@@ -80,7 +82,7 @@ bool Fixed::operator ==(Fixed& other) const{
 }
 
 bool Fixed::operator !=(Fixed& other) const{
-	std::cout << "!= operator called\n";
+	DBG(<< "!= operator called\n");
 	if (this != &other)
 	{
 		if (this->fixedPointNum != other.fixedPointNum)
@@ -91,29 +93,46 @@ bool Fixed::operator !=(Fixed& other) const{
 
 //Arithmetic operator Functions
 float Fixed::operator +(Fixed other){
-	std::cout << "+ operator called\n";
+	DBG(<< "+ operator called\n");
 	return this->toFloat() + other.toFloat();
 }
 
 float Fixed::operator -(Fixed other){
-	std::cout << "- operator called\n";
+	DBG(<< "- operator called\n");
 	return this->toFloat() - other.toFloat();
 }
 
 float Fixed::operator *(Fixed other){
-	std::cout << "* operator called\n";
+	DBG(<< "* operator called\n");
 	return this->toFloat() * other.toFloat();
 }
 
 float Fixed::operator /(Fixed other){
-	std::cout << "/ operator called\n";
+	DBG(<< "/ operator called\n");
 	return this->toFloat() / other.toFloat();
 }
 
 //Pre/Pro Decrement/Increment operators
-Fixed& Fixed::operator ++(void){
-	this->fixedPointNum += epsilon;
+Fixed& Fixed::operator ++(){
+	this->fixedPointNum += epsilon * 256;
 	return *this;
+}
+
+Fixed Fixed::operator ++(int){
+	Fixed old = *this;
+	this->fixedPointNum += epsilon * 256;
+	return old;
+}
+
+Fixed& Fixed::operator --(){
+	this->fixedPointNum -= epsilon * 256;
+	return *this;
+}
+
+Fixed Fixed::operator --(int){
+	Fixed old = *this;
+	this->fixedPointNum -= epsilon * 256;
+	return old;
 }
 
 //MinMax Functions
@@ -143,7 +162,7 @@ const Fixed& Fixed::max(const Fixed& num1 , const Fixed& num2){
 
 //Destructor
 Fixed::~Fixed(){
-	std::cout << "default destructor called" << std::endl;
+	DBG(<< "default destructor called" << std::endl);
 }
 
 //Getter Functions

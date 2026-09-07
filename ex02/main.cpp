@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:18 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/28 15:51:50 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/07 15:26:01 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,31 @@
 int main()
 {
 	Fixed a;
-	Fixed const b(Fixed(5.05f) * Fixed(2));
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	
+	std::cout << "----------SUBJECT PRINTS------------\n";
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+
+	
+	Fixed m1;
+	Fixed const m2(Fixed(5.05f) * Fixed(2));
+	std::cout << "----------MY PRINTS------------\n";
 	std::cout << Fixed(5.05f) * Fixed(5) << std::endl;
-	// std::cout << ++a << std::endl;
-	// std::cout << a << std::endl;
-	// std::cout << a++ << std::endl;
-	// std::cout << a << std::endl;
-
-	// std::cout << b << std::endl;
-
-	// std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << "a is: " << m1 << std::endl;
+	std::cout << ++m1 << std::endl;
 	
+	Fixed m3(125.5f);
+	std::cout << "m3 is: " << m3 << "\n" << "m3 after --m3 is: " << --m3 <<  std::endl;
 	Fixed han(23.5f);
 	Fixed ban(23.6f);
-	// Fixed a;
-	// std::cout << std::boolalpha;
-	// std::cout << (ban < han) << std::endl;
-	// std::cout << (han < ban) << std::endl;
-	// std::cout << (han - ban) << std::endl;
-	// std::cout << (han + ban) << std::endl;
 	std::cout << (han * ban) << std::endl;
-	// std::cout << (han / ban) << std::endl;
-	// std::cout << Fixed::min(ban, han) << std::endl;
-	// std::cout << std::noboolalpha;
-	// std::cout << Fixed::min(a, ban) << std::endl;
+	std::cout << (han * 2) << std::endl;
+	
 	return 0;
 }

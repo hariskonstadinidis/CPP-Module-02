@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/28 15:51:14 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/07 15:42:45 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 # include <iostream>
-
-static float epsilon = 0.00390625f;
  
+# ifdef DEBUG
+    #define DBG(x) do { std::cout x; } while (0)
+# else
+    #define DBG(x) do {} while (0)
+# endif
+
 class Fixed{
 	public:
 	//Constructors
@@ -37,6 +41,9 @@ class Fixed{
 	float operator /(Fixed other);
 	//Pre/Pro Decrement/Increment operators
 	Fixed& operator ++();
+	Fixed operator ++(int);
+	Fixed& operator --();
+	Fixed operator --(int);
 	// float operator -(Fixed& other);
 	// float operator *(Fixed& other);
 	// float operator /(Fixed& other);
