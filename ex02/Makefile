@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+         #
+#    By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/12 13:55:01 by hkonstan          #+#    #+#              #
-#    Updated: 2026/09/07 15:40:46 by hariskon         ###   ########.fr        #
+#    Updated: 2026/09/14 17:45:15 by hkonstan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex02
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -g -DDEBUG
+CXXFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 
 BUILD_DIR = build
 

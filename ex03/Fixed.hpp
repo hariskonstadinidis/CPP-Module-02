@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/08 14:34:35 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:39:20 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ class Fixed{
 	//Operator Member Functions
 	Fixed& operator =(const Fixed& other);
 	//Comparison operator Functions
-	bool operator <(Fixed& other) const;
-	bool operator >(Fixed& other) const;
-	bool operator ==(Fixed& other) const;
-	bool operator !=(Fixed& other) const;
+	bool operator <(const Fixed& other) const;
+	bool operator >(const Fixed& other) const;
+	bool operator ==(const Fixed& other) const;
+	bool operator !=(const Fixed& other) const;
 	//Arithmetic operator Functions
-	float operator +(Fixed other);
-	float operator -(Fixed other);
-	float operator *(Fixed other);
-	float operator /(Fixed other);
+	Fixed operator +(const Fixed& other) const;
+	Fixed operator -(const Fixed& other) const;
+	Fixed operator *(const Fixed& other) const;
+	Fixed operator /(const Fixed& other) const;
 	//Pre/Pro Decrement/Increment operators
 	Fixed& operator ++();
 	Fixed operator ++(int);
@@ -49,7 +49,7 @@ class Fixed{
 	
 	int		toInt(void) const;
 	float	toFloat(void) const;
-	float	getRawBits(void) const;
+	int	getRawBits(void) const;
 	
 	static Fixed& min(Fixed& num1, Fixed& num2);
 	static const Fixed& min(const Fixed& num1, const Fixed& num2);

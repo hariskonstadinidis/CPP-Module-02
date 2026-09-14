@@ -6,41 +6,38 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/08 14:33:26 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:31:40 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
-#include <iomanip>
 #include <cmath>
-#include <ostream>
 
-Fixed::Fixed(void): fractionalNum(8){
-	std::cout << "default constructor called\n";
+
+Fixed::Fixed(void): fixedPointNum(0){
+	std::cout << "Default constructor called\n";
 }
-Fixed::Fixed(const int fixed_value): fractionalNum(8){
-	std::cout << "int constructor called\n";
+
+Fixed::Fixed(const int fixed_value){
+	std::cout << "Int constructor called\n";
 	fixedPointNum = fixed_value * pow(2, this->fractionalNum);
 }
 
-Fixed::Fixed(const float fixed_number): fractionalNum(8){
-	std::cout << "float constructor called\n";
-	fixedPointNum = fixed_number * pow(2, this->fractionalNum);
+Fixed::Fixed(const float fixed_number){
+	std::cout << "Float constructor called\n";
+	fixedPointNum = roundf(fixed_number * pow(2, this->fractionalNum));
 }
 
 Fixed::Fixed(const Fixed& other){
-	std::cout << "copy constructor called\n";
+	std::cout << "Copy constructor called\n";
 	*this = other;
 }
 
 Fixed& Fixed::operator =(const Fixed& other){
-	std::cout << "copy operator called\n";
+	std::cout << "Copy operator called\n";
 	if (this != &other)
-	{
 		this->fixedPointNum = other.fixedPointNum;
-		this->fractionalNum = other.fractionalNum;
-	}
 	return *this;
 }
 
@@ -50,11 +47,11 @@ std::ostream& operator <<(std::ostream& file, const Fixed& a){
 }
 
 Fixed::~Fixed(){
-	std::cout << "default destructor called" << std::endl;
+	std::cout << "Default destructor called" << std::endl;
 }
 
-float Fixed::getRawBits(void) const{
-	return(this->fixedPointNum / pow(2, this->fractionalNum));
+int Fixed::getRawBits(void) const{
+	return(this->fixedPointNum);
 }
 
 int Fixed::toInt(void)const{

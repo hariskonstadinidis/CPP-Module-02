@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 13:57:35 by hkonstan          #+#    #+#             */
-/*   Updated: 2026/09/08 18:22:51 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:10:38 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Point::Point(const Point& other): x(other.x), y(other.y){
 	DBG(<< "copy constructor called\n");
 }
 
-Point& Point::operator=(Point& other){
+Point& Point::operator=(const Point& other){
 	DBG(<< "copy asignment operator called\n");
 	(void)other;
 	return *this;

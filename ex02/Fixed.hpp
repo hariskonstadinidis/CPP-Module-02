@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/07 15:42:45 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:38:50 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,26 @@ class Fixed{
 	//Operator Member Functions
 	Fixed& operator =(const Fixed& other);
 	//Comparison operator Functions
-	bool operator <(Fixed& other) const;
-	bool operator >(Fixed& other) const;
-	bool operator ==(Fixed& other) const;
-	bool operator !=(Fixed& other) const;
+	bool operator <(const Fixed& other) const;
+	bool operator >(const Fixed& other) const;
+	bool operator ==(const Fixed& other) const;
+	bool operator !=(const Fixed& other) const;
 	//Arithmetic operator Functions
-	float operator +(Fixed other);
-	float operator -(Fixed other);
-	float operator *(Fixed other);
-	float operator /(Fixed other);
+	Fixed operator +(const Fixed& other) const;
+	Fixed operator -(const Fixed& other) const;
+	Fixed operator *(const Fixed& other) const;
+	Fixed operator /(const Fixed& other) const;
 	//Pre/Pro Decrement/Increment operators
 	Fixed& operator ++();
 	Fixed operator ++(int);
 	Fixed& operator --();
 	Fixed operator --(int);
-	// float operator -(Fixed& other);
-	// float operator *(Fixed& other);
-	// float operator /(Fixed& other);
 	//Destructor
 	~Fixed();
 	
 	int		toInt(void) const;
 	float	toFloat(void) const;
-	float	getRawBits(void) const;
+	int	getRawBits(void) const;
 	
 	static Fixed& min(Fixed& num1, Fixed& num2);
 	static const Fixed& min(const Fixed& num1, const Fixed& num2);
@@ -60,8 +57,8 @@ class Fixed{
 	static const Fixed& max(const Fixed& num1, const Fixed& num2);
 	
 	private:
-	int		fixedPointNum;
-	static const int		fractionalNum = 8;
+	int				 fixedPointNum;
+	static const int fractionalNum = 8;
 };
 
 std::ostream& operator <<(std::ostream& file, const Fixed& a);

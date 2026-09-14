@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/25 16:15:48 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:09:44 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 
 class Fixed{
 	public:
-	Fixed();
-	Fixed(const int fixed_value);
-	Fixed(const float fixed_number);
-	Fixed(const Fixed& other);
-	Fixed& operator =(const Fixed& other);
-	~Fixed();
-	
-	int		toInt(void) const;
-	float	toFloat(void) const;
-	float	getRawBits(void) const;
-	
+		Fixed();
+		Fixed(const int fixed_value);
+		Fixed(const float fixed_number);
+		Fixed(const Fixed& other);
+		Fixed& operator =(const Fixed& other);
+		~Fixed();
+		
+		int		toInt(void) const;
+		float	toFloat(void) const;
+		int	getRawBits(void) const;
+		
 	private:
-	int		fixedPointNum;
-	int		fractionalNum;
+		int				 fixedPointNum;
+		static const int fractionalNum = 8;
 };
 
 std::ostream& operator <<(std::ostream& file, const Fixed& a);

@@ -6,7 +6,7 @@
 /*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/08 18:24:52 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:39:29 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(const int fixed_value){
 
 Fixed::Fixed(const float fixed_number){
 	DBG(<< "float constructor called\n");
-	fixedPointNum = fixed_number * pow(2, this->fractionalNum);
+	fixedPointNum = roundf(fixed_number * pow(2, this->fractionalNum));
 }
 
 //Copy Constructor
@@ -50,7 +50,7 @@ Fixed& Fixed::operator =(const Fixed& other){
 	return *this;
 }
 
-bool Fixed::operator <(Fixed& other) const{
+bool Fixed::operator <(const Fixed& other) const{
 	DBG(<< "< operator called\n");
 	if (this != &other)
 	{
@@ -60,7 +60,7 @@ bool Fixed::operator <(Fixed& other) const{
 	return false;
 }
 
-bool Fixed::operator >(Fixed& other) const{
+bool Fixed::operator >(const Fixed& other) const{
 	DBG(<< "> operator called\n");
 	if (this != &other)
 	{
@@ -70,7 +70,7 @@ bool Fixed::operator >(Fixed& other) const{
 	return false;
 }
 
-bool Fixed::operator ==(Fixed& other) const{
+bool Fixed::operator ==(const Fixed& other) const{
 	DBG(<< "== operator called\n");
 	if (this != &other)
 	{
@@ -81,7 +81,7 @@ bool Fixed::operator ==(Fixed& other) const{
 	return true;	
 }
 
-bool Fixed::operator !=(Fixed& other) const{
+bool Fixed::operator !=(const Fixed& other) const{
 	DBG(<< "!= operator called\n");
 	if (this != &other)
 	{
@@ -92,22 +92,22 @@ bool Fixed::operator !=(Fixed& other) const{
 }
 
 //Arithmetic operator Functions
-float Fixed::operator +(Fixed other){
+Fixed Fixed::operator +(const Fixed& other) const{
 	DBG(<< "+ operator called\n");
 	return this->toFloat() + other.toFloat();
 }
 
-float Fixed::operator -(Fixed other){
+Fixed Fixed::operator -(const Fixed& other) const{
 	DBG(<< "- operator called\n");
 	return this->toFloat() - other.toFloat();
 }
 
-float Fixed::operator *(Fixed other){
+Fixed Fixed::operator *(const Fixed& other) const{
 	DBG(<< "* operator called\n");
 	return this->toFloat() * other.toFloat();
 }
 
-float Fixed::operator /(Fixed other){
+Fixed Fixed::operator /(const Fixed& other) const{
 	DBG(<< "/ operator called\n");
 	return this->toFloat() / other.toFloat();
 }
@@ -166,8 +166,8 @@ Fixed::~Fixed(){
 }
 
 //Getter Functions
-float Fixed::getRawBits(void) const{
-	return(this->fixedPointNum / pow(2, this->fractionalNum));
+int Fixed::getRawBits(void) const{
+	return(this->fixedPointNum);
 }
 
 int Fixed::toInt(void)const{

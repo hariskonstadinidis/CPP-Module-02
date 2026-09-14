@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/07 15:42:23 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:39:01 by hkonstan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(const int fixed_value){
 
 Fixed::Fixed(const float fixed_number){
 	DBG(<< "float constructor called\n");
-	fixedPointNum = fixed_number * pow(2, this->fractionalNum);
+	fixedPointNum = roundf(fixed_number * pow(2, this->fractionalNum));
 }
 
 //Copy Constructor
@@ -44,33 +44,27 @@ Fixed::Fixed(const Fixed& other){
 Fixed& Fixed::operator =(const Fixed& other){
 	DBG(<< "copy operator called\n");
 	if (this != &other)
-	{
 		this->fixedPointNum = other.fixedPointNum;
-	}
 	return *this;
 }
 
-bool Fixed::operator <(Fixed& other) const{
+bool Fixed::operator <(const Fixed& other) const{
 	DBG(<< "< operator called\n");
 	if (this != &other)
-	{
 		if (this->fixedPointNum < other.fixedPointNum)
 			return true;
-	}
 	return false;
 }
 
-bool Fixed::operator >(Fixed& other) const{
+bool Fixed::operator >(const Fixed& other) const{
 	DBG(<< "> operator called\n");
 	if (this != &other)
-	{
 		if (this->fixedPointNum > other.fixedPointNum)
 			return true;
-	}
 	return false;
 }
 
-bool Fixed::operator ==(Fixed& other) const{
+bool Fixed::operator ==(const Fixed& other) const{
 	DBG(<< "== operator called\n");
 	if (this != &other)
 	{
@@ -81,33 +75,31 @@ bool Fixed::operator ==(Fixed& other) const{
 	return true;	
 }
 
-bool Fixed::operator !=(Fixed& other) const{
+bool Fixed::operator !=(const Fixed& other) const{
 	DBG(<< "!= operator called\n");
 	if (this != &other)
-	{
 		if (this->fixedPointNum != other.fixedPointNum)
 			return true;
-	}
 	return false;
 }
 
 //Arithmetic operator Functions
-float Fixed::operator +(Fixed other){
+Fixed Fixed::operator +(const Fixed& other) const{
 	DBG(<< "+ operator called\n");
 	return this->toFloat() + other.toFloat();
 }
 
-float Fixed::operator -(Fixed other){
+Fixed Fixed::operator -(const Fixed& other) const{
 	DBG(<< "- operator called\n");
 	return this->toFloat() - other.toFloat();
 }
 
-float Fixed::operator *(Fixed other){
+Fixed Fixed::operator *(const Fixed& other) const{
 	DBG(<< "* operator called\n");
 	return this->toFloat() * other.toFloat();
 }
 
-float Fixed::operator /(Fixed other){
+Fixed Fixed::operator /(const Fixed& other) const{
 	DBG(<< "/ operator called\n");
 	return this->toFloat() / other.toFloat();
 }
@@ -166,8 +158,8 @@ Fixed::~Fixed(){
 }
 
 //Getter Functions
-float Fixed::getRawBits(void) const{
-	return(this->fixedPointNum / pow(2, this->fractionalNum));
+int Fixed::getRawBits(void) const{
+	return(this->fixedPointNum);
 }
 
 int Fixed::toInt(void)const{
@@ -177,6 +169,7 @@ int Fixed::toInt(void)const{
 float Fixed::toFloat(void)const{
 	return (this->fixedPointNum/pow(2, this->fractionalNum));
 }
+
 //Non member ioperator function
 std::ostream& operator <<(std::ostream& file, const Fixed& a){
 	file << a.toFloat(); 
