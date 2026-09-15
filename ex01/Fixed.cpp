@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/14 18:31:40 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/15 22:24:39 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ Fixed::Fixed(void): fixedPointNum(0){
 
 Fixed::Fixed(const int fixed_value){
 	std::cout << "Int constructor called\n";
-	fixedPointNum = fixed_value * pow(2, this->fractionalNum);
+	fixedPointNum = fixed_value * 256;
 }
 
 Fixed::Fixed(const float fixed_number){
 	std::cout << "Float constructor called\n";
-	fixedPointNum = roundf(fixed_number * pow(2, this->fractionalNum));
+	fixedPointNum = roundf(fixed_number * 256.0f);
 }
 
 Fixed::Fixed(const Fixed& other){
@@ -55,9 +55,9 @@ int Fixed::getRawBits(void) const{
 }
 
 int Fixed::toInt(void)const{
-	return (this->fixedPointNum/pow(2, this->fractionalNum));
+	return (this->fixedPointNum/256);
 }
 
 float Fixed::toFloat(void)const{
-	return (this->fixedPointNum/pow(2, this->fractionalNum));
+	return (this->fixedPointNum/256.0f);
 }
