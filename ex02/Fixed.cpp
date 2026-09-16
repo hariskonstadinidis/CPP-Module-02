@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/14 18:39:01 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 15:31:49 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@
 #include <cmath>
 #include <ostream>
 
-static float epsilon = 0.00390625f;
-
 //Constructors
 Fixed::Fixed(void){
 	DBG(<< "default constructor called\n");
-	this->fixedPointNum = 0;
+	this->rawBits = 0;
 }
 
-Fixed::Fixed(const int fixed_value){
+Fixed::Fixed(const int fixed_number){
 	DBG(<< "int constructor called\n");
-	fixedPointNum = fixed_value * pow(2, this->fractionalNum);
+	rawBits = fixed_number << this->fractionalBits;
 }
 
 Fixed::Fixed(const float fixed_number){
 	DBG(<< "float constructor called\n");
-	fixedPointNum = roundf(fixed_number * pow(2, this->fractionalNum));
+	rawBits = roundf(fixed_number * (1 << this->fractionalBits));
 }
 
 //Copy Constructor
@@ -40,18 +38,18 @@ Fixed::Fixed(const Fixed& other){
 	*this = other;
 }
 
-//Operator Member Functions
+//Operators overload Member Functions
 Fixed& Fixed::operator =(const Fixed& other){
 	DBG(<< "copy operator called\n");
 	if (this != &other)
-		this->fixedPointNum = other.fixedPointNum;
+		this->rawBits = other.rawBits;
 	return *this;
 }
 
 bool Fixed::operator <(const Fixed& other) const{
 	DBG(<< "< operator called\n");
 	if (this != &other)
-		if (this->fixedPointNum < other.fixedPointNum)
+		if (this->rawBits < other.rawBits)
 			return true;
 	return false;
 }
@@ -59,7 +57,23 @@ bool Fixed::operator <(const Fixed& other) const{
 bool Fixed::operator >(const Fixed& other) const{
 	DBG(<< "> operator called\n");
 	if (this != &other)
-		if (this->fixedPointNum > other.fixedPointNum)
+		if (this->rawBits > other.rawBits)
+			return true;
+	return false;
+}
+
+bool Fixed::operator <=(const Fixed& other) const{
+	DBG(<< "< operator called\n");
+	if (this != &other)
+		if (this->rawBits <= other.rawBits)
+			return true;
+	return false;
+}
+
+bool Fixed::operator >=(const Fixed& other) const{
+	DBG(<< "> operator called\n");
+	if (this != &other)
+		if (this->rawBits >= other.rawBits)
 			return true;
 	return false;
 }
@@ -68,7 +82,7 @@ bool Fixed::operator ==(const Fixed& other) const{
 	DBG(<< "== operator called\n");
 	if (this != &other)
 	{
-		if (this->fixedPointNum == other.fixedPointNum)
+		if (this->rawBits == other.rawBits)
 			return true;
 		return false;
 	}
@@ -78,7 +92,7 @@ bool Fixed::operator ==(const Fixed& other) const{
 bool Fixed::operator !=(const Fixed& other) const{
 	DBG(<< "!= operator called\n");
 	if (this != &other)
-		if (this->fixedPointNum != other.fixedPointNum)
+		if (this->rawBits != other.rawBits)
 			return true;
 	return false;
 }
@@ -106,24 +120,24 @@ Fixed Fixed::operator /(const Fixed& other) const{
 
 //Pre/Pro Decrement/Increment operators
 Fixed& Fixed::operator ++(){
-	this->fixedPointNum += epsilon * 256;
+	this->rawBits += 1;
 	return *this;
 }
 
 Fixed Fixed::operator ++(int){
 	Fixed old = *this;
-	this->fixedPointNum += epsilon * 256;
+	this->rawBits += 1;
 	return old;
 }
 
 Fixed& Fixed::operator --(){
-	this->fixedPointNum -= epsilon * 256;
+	this->rawBits -= 1;
 	return *this;
 }
 
 Fixed Fixed::operator --(int){
 	Fixed old = *this;
-	this->fixedPointNum -= epsilon * 256;
+	this->rawBits -= 1;
 	return old;
 }
 
@@ -159,15 +173,15 @@ Fixed::~Fixed(){
 
 //Getter Functions
 int Fixed::getRawBits(void) const{
-	return(this->fixedPointNum);
+	return(this->rawBits);
 }
 
 int Fixed::toInt(void)const{
-	return (this->fixedPointNum/pow(2, this->fractionalNum));
+	return (this->rawBits >> this->fractionalBits);
 }
 
 float Fixed::toFloat(void)const{
-	return (this->fixedPointNum/pow(2, this->fractionalNum));
+	return (static_cast<float>(this->rawBits) / (1 << this->fractionalBits));
 }
 
 //Non member ioperator function

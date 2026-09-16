@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/14 18:38:50 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 12:50:13 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Fixed{
 	public:
 	//Constructors
 	Fixed();
-	Fixed(const int fixed_value);
+	Fixed(const int fixed_number);
 	Fixed(const float fixed_number);
 	Fixed(const Fixed& other);
 	//Operator Member Functions
@@ -32,6 +32,8 @@ class Fixed{
 	//Comparison operator Functions
 	bool operator <(const Fixed& other) const;
 	bool operator >(const Fixed& other) const;
+	bool operator <=(const Fixed& other) const;
+	bool operator >=(const Fixed& other) const;
 	bool operator ==(const Fixed& other) const;
 	bool operator !=(const Fixed& other) const;
 	//Arithmetic operator Functions
@@ -57,8 +59,8 @@ class Fixed{
 	static const Fixed& max(const Fixed& num1, const Fixed& num2);
 	
 	private:
-	int				 fixedPointNum;
-	static const int fractionalNum = 8;
+	int				 rawBits;
+	static const int fractionalBits = 8;
 };
 
 std::ostream& operator <<(std::ostream& file, const Fixed& a);

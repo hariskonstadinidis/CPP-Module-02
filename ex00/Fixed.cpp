@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/27 13:49:59 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 11:21:46 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iomanip>
 #include <cmath>
 
-Fixed::Fixed():fixedPointNum(0){
+Fixed::Fixed():rawBits(0){
 	std::cout << "Default constructor called\n";
 }
 
@@ -28,7 +28,7 @@ Fixed& Fixed::operator =(const Fixed& other){
 	std::cout << "Copy assignment operator called\n";
 	if (this != &other)
 	{
-		this->fixedPointNum = other.getRawBits();
+		this->rawBits = other.getRawBits();
 	}
 	return *this;
 }
@@ -39,10 +39,10 @@ Fixed::~Fixed(){
 
 int Fixed::getRawBits(void) const{
 	std::cout << "getRawBits member function called\n";
-	return (this->fixedPointNum);
+	return (this->rawBits);
 }
 
-void Fixed::setRawBits(int const raw){
+void Fixed::setRawBits(int const new_rawBits){
 	std::cout << "setRawBits member function called\n";
-	this->fixedPointNum = raw;
+	this->rawBits = new_rawBits;
 }

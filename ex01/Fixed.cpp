@@ -6,7 +6,7 @@
 /*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:16 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/15 22:24:39 by hariskon         ###   ########.fr       */
+/*   Updated: 2026/09/16 11:57:09 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #include <cmath>
 
 
-Fixed::Fixed(void): fixedPointNum(0){
+Fixed::Fixed(void): rawBits(0){
 	std::cout << "Default constructor called\n";
 }
 
-Fixed::Fixed(const int fixed_value){
+Fixed::Fixed(const int fixed_number){
 	std::cout << "Int constructor called\n";
-	fixedPointNum = fixed_value * 256;
+	rawBits = fixed_number << this->fractionalBits;
 }
 
 Fixed::Fixed(const float fixed_number){
 	std::cout << "Float constructor called\n";
-	fixedPointNum = roundf(fixed_number * 256.0f);
+	rawBits = roundf(fixed_number * (1 << this->fractionalBits));
 }
 
 Fixed::Fixed(const Fixed& other){
@@ -37,12 +37,12 @@ Fixed::Fixed(const Fixed& other){
 Fixed& Fixed::operator =(const Fixed& other){
 	std::cout << "Copy operator called\n";
 	if (this != &other)
-		this->fixedPointNum = other.fixedPointNum;
+		this->rawBits = other.rawBits;
 	return *this;
 }
 
-std::ostream& operator <<(std::ostream& file, const Fixed& a){
-	file << a.toFloat(); 
+std::ostream& operator <<(std::ostream& file, const Fixed& fixed_num){
+	file << fixed_num.toFloat(); 
 	return file;
 }
 
@@ -51,13 +51,13 @@ Fixed::~Fixed(){
 }
 
 int Fixed::getRawBits(void) const{
-	return(this->fixedPointNum);
+	return(this->rawBits);
 }
 
 int Fixed::toInt(void)const{
-	return (this->fixedPointNum/256);
+	return (this->rawBits >> this->fractionalBits);
 }
 
 float Fixed::toFloat(void)const{
-	return (this->fixedPointNum/256.0f);
+	return (static_cast <float>(this->rawBits) / (1 << this->fractionalBits));
 }

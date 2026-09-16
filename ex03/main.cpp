@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:18 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/08 18:32:43 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 12:59:34 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,24 @@ bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main()
 {
+	Fixed n1;
+	Fixed const n2( Fixed( 5.05f ) * Fixed( 2 ) );
+	std::cout << "\n";
+
+	std::cout << "----------SUBJECT PRINTS------------\n";
+	std::cout << n1 << std::endl;
+	std::cout << ++n1 << std::endl;
+	std::cout << n1 << std::endl;
+	std::cout << n1++ << std::endl;
+	std::cout << n1 << std::endl;
+	std::cout << n2 << std::endl;
+	std::cout << Fixed::max(n1, n2) << std::endl;
+	std::cout << "\n";
+	
+	Fixed m1;
+	Fixed const m2(Fixed(5.05f) * Fixed(2));
+	std::cout << "\n";
+	
 	Point a(0,0);
 	Point b(6,0);
 	Point c(3,5);

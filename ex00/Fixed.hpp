@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:13 by hariskon          #+#    #+#             */
-/*   Updated: 2026/08/27 13:45:46 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 11:23:57 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ class Fixed{
 	~Fixed();
 	
 	int		getRawBits(void) const;
-	void	setRawBits(int const raw);
+	void	setRawBits(int const new_rawBits);
 	
 	private:
-	int					fixedPointNum;
-	static const int	fractionalNum = 8;
+	int					rawBits;
+	static const int	fractionalBits = 8;
 };

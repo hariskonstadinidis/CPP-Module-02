@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkonstan <hkonstan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hariskon <hariskon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/21 14:33:18 by hariskon          #+#    #+#             */
-/*   Updated: 2026/09/14 17:55:10 by hkonstan         ###   ########.fr       */
+/*   Updated: 2026/09/16 13:00:34 by hariskon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,26 @@ int main()
 	std::cout << "m3 is: " << m3 << "\n" << "m3 after --m3 is: " << --m3 <<  std::endl;
 	Fixed han(23.5f);
 	Fixed ban(23.6f);
+	std::cout << "ban is: " << ban << "\n" << "ban after ++ban is: " << ++ban <<  std::endl;
 	std::cout << (han * ban) << std::endl;
 	std::cout << (han * 2) << std::endl;
 	std::cout << std::boolalpha;
 	std::cout << (han < ban) << std::endl;
 	std::cout << std::noboolalpha;
 	std::cout << "\n";
+	
+	std::cout << "\n";
+	Fixed q1(15.7f), q2(15.8f), q3(5), q4(5);
+	std::cout << "\n";
+	std::cout << std::boolalpha;
+	std::cout << q1 << " < " << q2 << " : " << (q1 < q2) << "\n";
+	std::cout << q1 << " > " << q2 << " : " << (q1 > q2) << "\n";
+	std::cout << q1 << " == " << q2 << " : " << (q1 == q2) << "\n";
+	std::cout << q1 << " != " << q2 << " : " << (q1 != q2) << "\n";
+	std::cout << q3 << " != " << q4 << " : " << (q3 != q4) << "\n";
+	std::cout << q3 << " == " << q4 << " : " << (q3 == q4) << "\n";
+	std::cout << "\n";
+
+	
 	return 0;
 }
